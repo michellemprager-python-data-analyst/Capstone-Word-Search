@@ -70,6 +70,9 @@ Hardcoded word lists inside `app.py`.
 ## Contact
 Email: michellmprager@gmail.com  
 Location: Hamburg, NJ
+www.linkedin.com/in/
+michelle-m-prager
+
 
 
 
