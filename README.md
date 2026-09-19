@@ -71,6 +71,8 @@ Hardcoded word lists inside `app.py`.
 |N/A      | N/A             |
 
 ## Contact
-* NCLab Support: https://www.nclab.com/support/
+Email: michellmprager@gmail.com  
+Location: Hamburg, NJ
+
 
 
