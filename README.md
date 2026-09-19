@@ -11,9 +11,6 @@ The purpose of this project is to create a kid-friendly **Word Search Game** usi
 The game generates a randomized 6×6 grid, hides themed words, provides hints, and allows the user to guess words through a web interface.  
 This project strengthens skills in Python functions, loops, HTML templating, and basic web app structure.
 
-### Partner
-* NCLab Python Developer Training Program  
-* Website: https://www.nclab.com/
 
 ### Methods Used
 * Randomization  
