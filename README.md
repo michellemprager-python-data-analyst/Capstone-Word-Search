@@ -1,78 +1,90 @@
-# Capstone-Word-Search
- This is my NCLAB Capstone Game to showcase my newly acquired skills.
-
-# Word Search Game — Python + Flask Capstone
-This project is part of my NCLab Python Developer training and demonstrates Python logic, randomization, and Flask web development.
-
-#### -- Project Status: Completed
-
-## Project Intro/Objective
-The purpose of this project is to create a kid-friendly **Word Search Game** using Python and Flask.  
-The game generates a randomized 6×6 grid, hides themed words, provides hints, and allows the user to guess words through a web interface.  
-This project strengthens skills in Python functions, loops, HTML templating, and basic web app structure.
+Author
+Michelle M. Prager
+NCLab Python Developer Training — Capstone Project
 
 
-### Methods Used
-* Randomization  
-* Grid Generation  
-* Basic Game Logic  
-* Web Development  
-* User Input Handling  
+Word Search Game — Capstone Project
+Overview
+This project is a kid‑friendly Word Search Game built using Python and Flask.
+It generates a 6×6 word search grid, hides themed words (animals, food, school), and allows the user to guess words through a simple web interface.
 
-### Technologies
-* Python  
-* Flask  
-* HTML  
-* CSS  
+The game provides:
 
-## Project Description
-This project randomly selects a theme (animals, food, school), chooses words from that theme, and places them horizontally or vertically in a 6×6 grid.  
-Unused spaces are filled with random letters.  
-The user interacts with the game through a simple HTML page styled with CSS.
+A randomly selected theme
 
-**Challenges faced:**
-- Understanding Flask routing  
-- Connecting Python logic to HTML templates  
-- Structuring multi-file projects  
-- Debugging grid generation and word placement  
+A hint related to the hidden words
 
-**Data Sources:**  
-Hardcoded word lists inside `app.py`.
+A dynamically generated word search grid
 
-## Needs of this project
-- Diagonal word placement  
-- Score tracking  
-- Highlighting found words  
-- Multiple difficulty levels  
-- Sound effects or animations  
+Feedback messages for correct or incorrect guesses
 
-## Getting Started
+This project demonstrates:
 
-1. Clone this repo.
-2. Install dependencies:
-3. Run the Flask app:
-4. Open the game in your browser:  http://127.0.0.1:5000 (127.0.0.1 in Bing)
+Python functions
 
+Randomized grid generation
 
-## Featured Deliverables
-* Word Search Grid Generator  
-* Flask Web Interface  
-* HTML/CSS Game Page  
+Flask routing
 
-## Contributing Members
- Michelle M. Prager
+HTML templating
 
-#### Other Members:
-|Name     |  Slack Handle   | 
-|---------|-----------------|
-|N/A      | N/A             |
+Basic CSS styling
 
-## Contact
-Email: michellmprager@gmail.com  
-Location: Hamburg, NJ
-www.linkedin.com/in/
-michelle-m-prager
+Full project structure for a web application
 
+Project Structure
+Code
+PythonProject_Capstone_Word_Search_Game/
+│
+├── app.py                 # Main Flask application
+│
+├── requirements.txt       # Project dependencies
+│
+├── static/
+│   └── style.css          # Styling for the game page
+│
+└── templates/
+    └── game.html          # HTML template for the game interface
+How to Run the Project
+1. Install dependencies
+Run this in your terminal:
 
+Code
+pip install -r requirements.txt
+2. Start the Flask app
+Run:
 
+Code
+py app.py
+You should see:
 
+Code
+ * Running on http://127.0.0.1:5000
+3. Open the game
+Go to:
+
+Code
+http://127.0.0.1:5000
+Features
+Random theme selection
+
+Random hint selection
+
+Words placed horizontally or vertically
+
+Random letters fill unused spaces
+
+Clean, simple interface
+
+Kid‑friendly feedback messages
+
+Future Improvements
+Add diagonal word placement
+
+Add multiple difficulty levels
+
+Add score tracking
+
+Add a “found words” highlight in the grid
+
+Add sound effects or animations
