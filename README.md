@@ -31,14 +31,10 @@ The game provides:
 ---
 
 ## Project Structure
-PythonProject_Capstone_Word_Search_Game/
-│
-├── app.py               # Main Flask application
-├── requirements.txt     # Project dependencies
-├── static/
-│   └── style.css        # Styling for the game page
-└── templates/
-    └── game.html        # HTML template for the game interface
+- `app.py` — Main Flask application
+- `requirements.txt` — Project dependencies  
+- `static/style.css` — Styling for the game page
+- `templates/game.html` — HTML template for the game interface
 
 
 
