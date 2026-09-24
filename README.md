@@ -38,7 +38,8 @@ PythonProject_Capstone_Word_Search_Game/
 ├── static/
 │   └── style.css        # Styling for the game page
 └── templates/
-└── game.html        # HTML template for the game interface
+    └── game.html        # HTML template for the game interface
+
 
 
 ---
