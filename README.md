@@ -42,11 +42,27 @@ The game provides:
 
 ## Installation Instructions
 
-1. **Clone the repository:**
-2. **Navigate to the project folder:
+1. **1. Clone the repository:**
+```bash
+git clone https://github.com/michellemprager-python-data-analyst/Capstone-Word-Search.git
+
+2. **Navigate to the project folder:**
+```bash
+cd Capstone-Word-Search
+
 3. **Install dependencies:**
-4. **Start the Flask app:**
+```bash
+pip install -r requirements.txt
+
+4. **Run the application:**
+```bash
+python app.py
+
+
 5. **Open the game in your browser:**
+```bash
+http://127.0.0.1:5000
+
 
 
 ---
