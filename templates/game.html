@@ -1,31 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Search Game</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+<div class="container">
+    <h1>🔤 Word Search Game</h1>
 
-<h1>Kid-Friendly Word Search Game</h1>
+    {% if not game_over %}
+    <div class="scoreboard">
+        <span>🎯 Theme: <strong>{{ theme_name }}</strong></span>
+        <span>⭐ Score: <strong>{{ score }}</strong></span>
+    </div>
+    {% endif %}
 
-<p><strong>Hint:</strong> {{ hint }}</p>
+    {% if game_over %}
+    <div class="card game-over-card">
+        <h2>🎉 You found all the words!</h2>
+        <p class="final-score">Final Score: <strong>{{ score }}</strong></p>
+        <p class="reveal">🕵️ The mystery location was: <strong>{{ location_answer }}</strong></p>
+        <h3>Words you found:</h3>
+        <ul class="word-list">
+            {% for word in found_words %}
+                <li class="found">✅ {{ word.upper() }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/reset" class="btn-start">🔄 Play Again</a>
+    </div>
+    {% else %}
+    <div class="game-area">
+        <div class="left-panel">
+            <div class="card">
+                <h3>💡 Hint</h3>
+                <p class="hint">{{ hint }}</p>
+            </div>
+            <div class="card">
+                <h3>📋 Words to Find</h3>
+                <ul class="word-list">
+                    {% for word in words %}
+                        {% if word in found_words %}
+                            <li class="found">✅ {{ word.upper() }}</li>
+                        {% else %}
+                            <li class="pending">🔍 {{ word.upper() }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card">
+                <h3>✏️ Or Type a Word</h3>
+                <form action="/guess" method="POST" id="guess-form">
+                    <input type="text" name="guess" id="guess-input" placeholder="Type a word..." autocomplete="off">
+                    <button type="submit" class="btn-guess">Guess!</button>
+                </form>
+                {% if message %}
+                    <p class="message {% if 'Great' in message %}success{% elif 'already' in message %}warning{% else %}error{% endif %}">
+                        {{ message }}
+                    </p>
+                {% endif %}
+            </div>
+        </div>
 
-<table>
-    {% for row in grid %}
-    <tr>
-        {% for letter in row %}
-        <td>{{ letter }}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-</table>
+        <div class="right-panel">
+            <div class="card">
+                <h3>🔲 Click the letters to find words!</h3>
+                <table class="grid">
+                    {% for row in grid %}
+                    <tr>
+                        {% for cell in row %}
+                        <td data-row="{{ loop.index0 }}"
+                            data-col="{{ loop.index0 }}"
+                            onclick="handleCellClick(this)">{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                <p class="grid-hint">Click letters in order — click any to reset selection</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-<form method="POST">
-    <input type="text" name="guess" placeholder="Type a word">
-    <button type="submit">Submit</button>
-</form>
+    <div class="footer">
+        <a href="/reset" class="btn-reset">🏠 Start Over</a>
+    </div>
+</div>
 
-<p>{{ message }}</p>
+<script>
+    const positions = {{ positions_json | safe }};
+    const foundWords = {{ found_words | tojson }};
+    const foundCoords = {{ found_coords | tojson }};
+    let selected = [];
 
+    // Fix column data attributes on load (Jinja loop.index0 resets per row)
+    window.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.grid tr').forEach(function(row, rIdx) {
+            row.querySelectorAll('td').forEach(function(td, cIdx) {
+                td.dataset.row = rIdx;
+                td.dataset.col = cIdx;
+            });
+        });
+        updateCellStyles();
+    });
+
+    function isFountCoord(r, c) {
+        return foundCoords.some(function(fc) { return fc[0] === r && fc[1] === c; });
+    }
+
+    function isSelectedCoord(r, c) {
+        return selected.some(function(s) { return s[0] === r && s[1] === c; });
+    }
+
+    function handleCellClick(td) {
+        const r = parseInt(td.dataset.row);
+        const c = parseInt(td.dataset.col);
+
+        if (isFountCoord(r, c)) return;
+
+        if (isSelectedCoord(r, c)) {
+            selected = [];
+            updateCellStyles();
+            return;
+        }
+
+        selected.push([r, c]);
+        updateCellStyles();
+        checkForWord();
+    }
+
+    function checkForWord() {
+        for (const word in positions) {
+            if (foundWords.includes(word)) continue;
+            const coords = positions[word];
+            if (coords.length !== selected.length) continue;
+            const match = coords.every(function(coord, i) {
+                return coord[0] === selected[i][0] && coord[1] === selected[i][1];
+            });
+            if (match) {
+                document.getElementById('guess-input').value = word;
+                document.getElementById('guess-form').submit();
+                return;
+            }
+        }
+    }
+
+    function updateCellStyles() {
+        document.querySelectorAll('.grid td').forEach(function(td) {
+            const r = parseInt(td.dataset.row);
+            const c = parseInt(td.dataset.col);
+            td.classList.remove('cell-found', 'cell-selected');
+            if (isFountCoord(r, c)) {
+                td.classList.add('cell-found');
+            } else if (isSelectedCoord(r, c)) {
+                td.classList.add('cell-selected');
+            }
+        });
+    }
+</script>
 </body>
 </html>
